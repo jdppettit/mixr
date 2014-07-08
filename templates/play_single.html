@@ -1,0 +1,66 @@
+{% extends 'index.html'%}
+{% block title %}
+- Now Playing {{ title }}
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<script src="https://www.youtube.com/player_api"></script>
+<script>
+	// create youtube player
+        var player;
+        function onYouTubePlayerAPIReady() {
+            player = new YT.Player('player', {
+              height: '390',
+              width: '640',
+              videoId: '{{ video_to_play }}',
+              events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+              }
+            });
+        }
+
+        // autoplay video
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+	function onPlayerStateChange(event) {
+		if(event.data == 0) {
+			window.location.replace("https://www.mixr.pw/play/once/{{ video_to_play }}")
+		}
+
+	function setLast() {
+		 window.location.replace("https://www.mixr.pw/playlist/setlast/{{ playlist_id }}/{{ video_id }}")
+	}
+	}
+
+	document.onkeydown = function(evt) {
+        evt = evt || window.event;
+    	if (evt.keyCode == 32) {
+        	if (player.getPlayerState() == 1) {
+			player.pauseVideo();
+		}
+		else {
+			player.playVideo();
+		}
+    	}
+	else if (evt.keyCode == 19) {
+		location.reload()
+	}
+};
+
+</script>
+<h2>Now Playing: {{ title }}</h2>
+<div id="player"></div><br/><br/>
+<a href="/playlist" class="btn btn-default" role="button">Back to Playlists</a>
+{% endblock %}

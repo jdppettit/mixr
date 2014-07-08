@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+{% block title %}
+- Import
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+<div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<h3>Import a YouTube Playlist</h3>
+<p>mixr can easily import an existing YouTube playlist. To do that, just add in the playlist ID from the YouTube playlist. You can find the playlist ID after the p= in the URL, there's an example below:</p>
+<p>https://www.youtube.com/view_play_list?p=<strong>63F0C78739B09958</strong></p>
+<form action="/playlist/import/youtube/handler" method="post">
+	<input class="form-control" type="text" name="youtube_playlist_id" placeholder="Playlist ID"/><br/>
+	<input type="submit" value="Import" class="form-control btn btn-success"/>
+</form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% block title %}
+- Edit Playlist ({{ playlist.title }})
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+{% if error %}
+{{ error }}
+{% endif %}
+{% if message %}
+{{ message }}
+{% endif %}
+<a href="/playlist" class="btn btn-default" role="button">Back</a><br/><br/>
+<form action="/playlist/edit/{{ playlist.id }}/handler" method="post">
+	Playlist Name <input class="form-control" type="text" name="name" placeholder="{{ playlist.title }}"/><br/>
+	Make Public? <input class="form-control" type="checkbox" name="public" {% if playlist.public == 1 %} checked {% endif %}/><br/><br/>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
+</form>
+{% endblock %}

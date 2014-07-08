@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block title %}
+- About
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<h2>mixr is simple.</h2>
+<p>mixr takes your favorite music from YouTube and plays it forever. How does it do that? Well, you start by creating a playlist, then you add your favorite songs and give them a weight.</p>
+<p>Songs with a higher weight play more, simple as that! mixr automatically serves up a new song as soon as the last finishes, its always different, and its only the music YOU want.</p>
+<p>We think services like Pandra or Slacker are great, but sometimes, you just want to listen to your own music on repeat without having to think about it, that's what we do at mixr!</p>
+<h2>mixr is free.</h2>
+<p>Yep, completely free! How? Well, we have an ad here or there, but the secret is Youtube! All of the music on mixr is streamed directly from Youtube, so no cost for us, or you.</p>
+{% endblock %}

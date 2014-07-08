@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+{% block title %}
+- Playlist ({{ playlist.title }})
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<a href="/playlist" class="btn btn-default" role="button">Back</a>&nbsp;
+{% if not public %}<a href="/playlist/add/{{ playlist.id }}" class="btn btn-primary" role="button">Add a Song</a>&nbsp;{% endif %}
+<a href="/playlist/play/{{ playlist.id }}" class="btn btn-success" role="button">Play</a><br/><br/>
+<h2>{{ playlist.title }}</h2>
+<br/>
+{% set x = 0 %}
+{% for song in songs %}
+{% if x%2 == 0 %}
+<div style="padding:10px;">
+<img src="https://img.youtube.com/vi/{{ song.url }}/default.jpg" align="left" style="padding-right:10px"/>
+Song Title: {{ song.title }}<br/>
+Song Weight: {{ song.weight }}<br/>
+Song URL: {{ song.url }}<br/>
+<a class="btn btn-success btn-sm" role="button" href="/play/once/{{ song.url }}">Play Song</a>&nbsp;
+<a class="btn btn-info btn-sm" role="button" href="/song/edit/{{ song.id }}">Edit Song</a>&nbsp;
+<a class="btn btn-primary btn-sm" role="button" href="/song/{{ song.id }}/tag/add">Add Tag</a>&nbsp;
+<a onclick="return confirm('Are you sure you want to delete this song?')" class="btn btn-danger btn-sm" role="button" href="/song/delete/{{ song.id }}">Delete Song</a><br/>
+<br/>
+<ul class="tags">
+{% for tag in tags %}
+{% if tag.song_id == song.id %}
+<li><a class="tag" href="/tag/{{ tag.id }}">{{ tag.tag_name }}</a><a class="close" href="/song/{{ song.id }}/tag/{{ tag.id }}/delete">&times;</a></li>
+{% endif %}
+{% endfor %}
+</ul>
+</div>
+{% else %}
+<div style="background-color:#E6E6E6; padding:10px;"><br/>
+<img src="https://img.youtube.com/vi/{{ song.url }}/default.jpg" align="left" style="padding-right:10px"/>
+Song Title: {{ song.title }}<br/>
+Song Weight: {{ song.weight }}<br/>
+Song URL: {{ song.url }}<br/>
+<a class="btn btn-success btn-sm" role="button" href="/play/once/{{ song.url }}">Play Song</a>&nbsp;
+<a class="btn btn-info btn-sm" role="button" href="/song/edit/{{ song.id }}">Edit Song</a>&nbsp;
+<a class="btn btn-primary btn-sm" role="button" href="/song/{{ song.id }}/tag/add">Add Tag</a>&nbsp;
+<a onclick="return confirm('Are you sure you want to delete this song?')" class="btn btn-danger btn-sm" role="button" href="/song/delete/{{ song.id }}">Delete Song</a><br/><br/>
+<ul class="tags">
+{% for tag in tags %}
+{% if tag.song_id == song.id %}
+<li><a class="tag" href="/tag/{{ tag.id }}">{{ tag.tag_name }}</a><a class="close" href="/song/{{ song.id }}/tag/{{ tag.id }}/delete">&times;</a></li>
+{% endif %}
+{% endfor %}
+</ul>
+</div>
+<br/>
+{% endif %}
+{% set x = x+1 %}
+{% endfor %}
+<br/><a href="/playlist" class="btn btn-default" role="button">Back</a>&nbsp;
+<a href="/playlist/add/{{ playlist.id }}" class="btn btn-primary" role="button">Add a Song</a>&nbsp;
+<a href="/playlist/play/{{ playlist.id }}" class="btn btn-success" role="button">Play</a><br/><br/>
+{% endblock %}

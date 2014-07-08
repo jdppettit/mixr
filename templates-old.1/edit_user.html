@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block title %}
+- Admin - Edit User
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+	<form action="/admin/user/edit/{{ user.id }}/handler" method="post">
+		<h3>Username: {{ user.username }}</h3>
+		Username: <input class="form-control" type="text" name="username" placeholder="{{ user.username }}"/><br/>
+		Email: <input class="form-control" type="text" name="email" placeholder="{{ user.email }}"/><br/>
+		Password: <input class="form-control" type="password" name="password" placeholder="Password"/><br/>
+		
+		Default <input type="radio" value="default" class="form-control" name="algorithim" {% if user.random_type == 0 %} checked {% endif %}/>
+		Favor Lower Played <input value="lower" type="radio" class="form-control" name="algorithim" {% if user.random_type == 1 %} checked {% endif %}/>
+		<br/>
+		<button class="btn btn-success" type="submit">Submit Changes</button>
+	</form>
+{% endblock %}

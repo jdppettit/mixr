@@ -1,0 +1,24 @@
+{% extends 'index.html'%}
+{% block title %}
+- Now Playing {{ title }}
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+{% if video_id %}
+<meta http-equiv="refresh" content="{{ duration }}">
+<h2>Now Playing: {{ title }}</h2>
+<iframe width="560" height="315" src="//www.youtube.com/embed/{{ video_id }}?autoplay=1&loop={{ loop }}" frameborder="0" allowfullscreen></iframe><br/><br/>
+<a href="/playlist" class="btn btn-default" role="button">Back to Playlists</a>
+{% else %}
+You didn't specify a video ID
+{% endif %}
+{% endblock %}

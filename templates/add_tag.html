@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% block title %}
+- Add Tag
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+	{% if tag_type == "song" %}
+	<a class="btn btn-default" role="button" href="/playlist">Back</a>
+	<h2>Add a Tag</h2>
+	<p>Adding a tag to a song or playlist makes it easier to classify and find a certain type of song or playlist. Just enter the name of the tag below. Things with the same tag name will show up when you click a tag.</p>
+	<form action="/song/{{ song_id }}/tag/add/handler" method="post">
+		<input type="text" class="form-control" name="tag_title" placeholder="Tag title"/><br/>
+		<button class="btn btn-info form-control" type="submit">Add Tag</button>
+	</form>
+	{% elif tag_type == "playlist" %}
+	<a class="btn btn-default" role="button" href="/playlist">Back</a>
+	<h2>Add a Tag</h2>
+	<p>Adding a tag to a song or playlist makes it easier to classify and find a certain type of song or playlist. Just enter the name of the tag below. Things with the same tag name will show up when you click a tag.</p>
+	<form action="/playlist/{{ playlist_id }}/tag/add/handler" method="post">
+                <input type="text" class="form-control" name="tag_title" placeholder="Tag title"/><br/>
+                <button class="form-control btn btn-info" type="submit">Add Tag</button>
+        </form>
+	{% else %}
+	<h2>Sorry, something went wrong, try again.</h2>
+	{% endif %}
+{% endblock %}

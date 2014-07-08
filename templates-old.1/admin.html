@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% block title %}
+- Admin
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<h2>Users</h2>
+{% for user in users %}
+<a href="/admin/user/edit/{{ user.id }}">{{ user.username }}</a>&nbsp;&nbsp;<a onclick="return confirm('Are you sure you want to delete this user? Are you REALLY SURE?')" role="button" class="btn btn-danger btn-sm" href="/admin/user/delete/{{ user.id }}">Delete user</a>&nbsp;&nbsp;<a href="/admin/user/{{ user.id }}/reset" role="button" class="btn btn-info">Send Reset</a><br/><br/>
+{% endfor %}
+<br/>
+<a href="/admin/user/create" class="btn btn-info" role="button">Add a User</a>
+<h2>Admins</h2>
+{% for admin in admins %}
+{{ admin.username }}&nbsp;&nbsp;<a onclick="return confirm('Are you sure you want to delete this user? Are you REALLY SURE?')" role="button" class="btn btn-danger btn-sm" href="/admin/admin/delete/{{ admin.id }}">Delete admin</a><br/><br/>
+{% endfor %}
+<a href="/admin/admin/create" class="btn btn-info" role="button">Add an Admin</a>
+<h2>Playlists</h2>
+{% for playlist in playlists %}
+{{ playlist.title }}<br/>
+{% endfor %}
+<h2>Songs</h2>
+{% for song in songs %}
+{{ song.title }}<br/>
+{% endfor %}
+{% endblock %}

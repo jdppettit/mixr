@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+{% block title %}
+- Admin - Edit Admin
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+	<form action="/admin/admin/edit/{{ admin.id }}/handler" method="post">
+		<h3>Username: {{ admin.username }}</h3>
+		Username: <input class="form-control" type="text" name="username" placeholder="{{ admin.username }}"/><br/>
+		Password: <input class="form-control" type="password" name="password" placeholder="Password"/><br/>
+		<br/>
+		<button class="btn btn-success" type="submit">Submit Changes</button>
+	</form>
+{% endblock %}

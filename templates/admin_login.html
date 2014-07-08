@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% block title %}
+- About
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+	<form action="/admin/login/handler" method="post">
+		<input type="text" name="username" placeholder="Username" class="form-control"/><br/>
+		<input type="password" name="password" placeholder="Password" class="form-control"/><br/>
+		<button class="btn btn-success form-control" type="submit">Login</button>
+	</form>
+{% endblock %}

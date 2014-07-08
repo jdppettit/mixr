@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block title %}
+- Edit Song ({{ song.title }})
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+{% if song_id %}
+<form action="/song/edit/{{ song_id }}/handler" method="post">
+        YouTube URL <input class="form-control" type="text" name="url" placeholder="{{ song.url }}"/><br/>
+        Weight <input class="form-control" type="text" name="weight" placeholder="{{ song.weight }}"/><br/>
+        Title <input class="form-control" type="text" name="title" placeholder=" {{ song.title }}"/><br/>
+        <br/>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
+</form>
+{% else %}
+You did not provide a valid song ID, please go back and try again.
+{% endif %}
+{% endblock %}

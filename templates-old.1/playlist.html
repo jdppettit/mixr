@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% block title %}
+- Playlists
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<a class="btn btn-lg btn-success" role="button" href="/playlist/create">Create a Playlist</a>&nbsp;
+<a class="btn btn-lg btn-info" role="button" href="/playlist/import/youtube">Import a YouTube Playlist</a><br/><br/>
+{% set x = 0 %}
+{% for playlist in playlists %}
+{% if x%2 == 0 %}
+<div style="padding:10px">
+<img src="https://secure.gravatar.com/avatar/{{ playlist.hash_value }}?s=125&d=identicon&r=PG" align="left" style="padding-right:10px"/>
+<h3><a href="/playlist/{{ playlist.id }}">{{ playlist.title }}</a></h3>
+<ul class="tags">
+{{ playlist.numSongs }} songs<br/>
+{% for tag in tags %}
+{% if tag.playlist_id == playlist.id %}
+<li><a class="tag" href="/tag/{{ tag.id }}">{{ tag.tag_name }}</a><a class="close" href="/playlist/{{ playlist.id }}/tag/{{ tag.id }}/delete">&times;</a></li>
+{% endif %}
+{% endfor %}
+</ul>
+<br/>
+<a class="btn btn-success btn-sm" role="button" href="/playlist/play/{{ playlist.id }}">Play</a>&nbsp;
+<a class="btn btn-primary btn-sm" role="button" href="/playlist/add/{{ playlist.id }}">Add Song</a>&nbsp;
+<a class="btn btn-primary btn-sm" role="button" href="/playlist/{{ playlist.id }}/tag/add">Add Tag</a>&nbsp;
+<a class="btn btn-info btn-sm" role="button" href="/playlist/edit/{{ playlist.id }}">Edit Playlist</a>&nbsp;
+<a class="btn btn-info btn-sm" role="button" href="/playlist/{{ playlist.id }}">View Songs</a>&nbsp;
+<a class="btn btn-danger btn-sm" role="button" onclick="return confirm('Are you sure you want to delete this playlist?')" href="/playlist/delete/{{ playlist.id }}">Delete Playlist</a><br/><br/></div>
+{% else %}
+<div style="background-color:#E6E6E6; padding:10px;">
+<br/>
+<img src="https://secure.gravatar.com/avatar/{{ playlist.hash_value }}?s=125&d=identicon&r=PG" align="left" style="padding-right:10px"/>
+<h3><a href="/playlist/{{ playlist.id }}">{{ playlist.title }}</a></h3>
+<ul class="tags">
+{{ playlist.numSongs }} songs<br/>
+{% for tag in tags %}
+{% if tag.playlist_id == playlist.id %}
+<li><a class="tag" href="/tag/{{ tag.id }}">{{ tag.tag_name }}</a><a class="close" href="/playlist/{{ playlist.id }}/tag/{{ tag.id }}/delete">&times;</a></li>
+{% endif %}
+{% endfor %}
+</ul>
+<br/>
+<a class="btn btn-success btn-sm" role="button" href="/playlist/play/{{ playlist.id }}">Play</a>&nbsp;
+<a class="btn btn-primary btn-sm" role="button" href="/playlist/add/{{ playlist.id }}">Add Song</a>&nbsp;
+<a class="btn btn-primary btn-sm" role="button" href="/playlist/{{ playlist.id }}/tag/add">Add Tag</a>&nbsp;
+<a class="btn btn-info btn-sm" role="button" href="/playlist/edit/{{ playlist.id }}">Edit Playlist</a>&nbsp;
+<a class="btn btn-info btn-sm" role="button" href="/playlist/{{ playlist.id }}">View Songs</a>&nbsp;
+<a class="btn btn-danger btn-sm" role="button" onclick="return confirm('Are you sure you want to delete this playlist?')" href="/playlist/delete/{{ playlist.id }}">Delete Playlist</a><br/><br/></div>
+{% endif %}
+{% set x = x+1 %}
+{% endfor %}
+{% endblock %}

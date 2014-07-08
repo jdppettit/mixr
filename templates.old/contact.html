@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block title %}
+- Contact
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<h2>contact me</h2>
+<p>I'd love to see mixr turn into a community driven project, with that said, I'd love to hear your feedback!</p>
+<p><a href="mailto:jpettit@pettitservers.com">Click Here</a> to send me an email.</p>
+{% endblock %}

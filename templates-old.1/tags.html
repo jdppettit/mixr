@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% block title %}
+- Tag ({{ tag.tag_name }})
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<h2>Things tagged with "{{ tag.tag_name }}"</h2>
+<h2>Playlists</h2>
+{% for playlist in playlists %}
+<a href="/playlist">{{ playlist.title }}</a><br/>
+{% endfor %}
+<br/>
+<h2>Songs</h2>
+{% for song in songs %}
+<a href="/playlist/{{ song.playlist_id }}">{{ song.title }}</a><br/>
+{% endfor %}
+{% endblock %}

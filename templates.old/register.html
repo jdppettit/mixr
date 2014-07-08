@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% block title %}
+- Register
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+{% if error %}
+{{ error }}
+{% endif %}
+<form action="{{ url_for('registerHandler') }}" method="post">
+	<input type="text" name="username" class="form-control" placeholder="Username"/><br/>
+	<input type="password" name="password" class="form-control" placeholder="Password"/><br/>
+	<input type="password" name="password_again" class="form-control" placeholder="Password Again"/><br/>
+	<input type="email" name="email" class="form-control" placeholder="Email Address"/><br/><br/>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+</form>
+{% endblock %}

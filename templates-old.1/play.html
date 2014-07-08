@@ -1,0 +1,116 @@
+{% extends 'index.html' %}
+{% block title %}
+- Now Playing ({{ title }})
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<meta property="og:title" content="My mixr playlist"/>
+<meta property="og:description" content="mixr is your personal dj, give it links to your favorite music, rate each song, and then kick back and enjoy a never-ending playlist of your favorite music"/>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=179028465639075";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script src="https://www.youtube.com/player_api"></script>
+<script>
+	// create youtube player
+        var player;
+        function onYouTubePlayerAPIReady() {
+            player = new YT.Player('player', {
+              height: '390',
+              width: '640',
+              videoId: '{{ video_to_play }}',
+              events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+              }
+            });
+        }
+
+        // autoplay video
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+	function onPlayerStateChange(event) {
+		if(event.data == 0) {
+			window.location.replace("https://www.mixr.pw/playlist/setlast/{{ playlist_id }}/{{ video_to_play }}")
+		}
+
+	function setLast() {
+		 window.location.replace("https://www.mixr.pw/playlist/setlast/{{ playlist_id }}/{{ video_id }}")
+	}
+	}
+	
+	document.onkeydown = function(evt) {
+        evt = evt || window.event;
+    	if (evt.keyCode == 32) {
+        	if (player.getPlayerState() == 1) {
+			player.pauseVideo();
+		}
+		else {
+			player.playVideo();
+		}
+    	}
+	else if (evt.keyCode == 19) {
+		location.reload()
+	}
+};
+
+</script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- alto - top -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:468px;height:60px"
+     data-ad-client="ca-pub-0155569923111859"
+     data-ad-slot="9903812838"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><br/><br/>
+<h3>Now Playing: {{ title }}</h3>
+<div id="player"></div>
+<br/><br/>
+{% if lastplayed %}
+<a class="btn btn-success" role="button" href="/playlist/play/{{ playlist_id}}">Next Song</a>&nbsp;
+{% else %}
+<a class="btn btn-success" role="button" href="/playlist/setlast/{{ playlist_id }}/{{ video_to_play }}">Next Song</a>&nbsp;
+{% endif %}
+<a class="btn btn-info" role="button" href="/playlist/play/{{ playlist_id }}/last">Last Song</a>&nbsp;
+<a class="btn btn-info" role="button" target="_blank" href="/playlist/{{ playlist_id }}">View Playlist</a>&nbsp;
+<a class="btn btn-info" role="button" target="_blank" href="/playlist/add/{{ playlist_id }}">Add Song to Playlist</a>&nbsp;
+<a class="btn btn-warning" title="Skip this song next time it is selected by mixr" role="button" href="/playlist/{{ playlist_id }}/suppress/{{ video_to_play }}">Suppress</a>&nbsp;
+<br/><br/><a href="/playlist" target="_blank" class="btn btn-default" role="button">View All Playlists</a>&nbsp;
+&nbsp;<a href="/song/edit/{{ song.id }}" target="_blank" class="btn btn-default" role="button">Change Weight ({{ song.weight }})</a>
+<a target="_blank" title="Increase weight by 1" class="btn btn-default" role="button" href="/playlist/{{ playlist_id }}/{{ song.id }}/up">+1</a>&nbsp;
+<a target="_blank" title="Decrease weight by 1" class="btn btn-default" role="button" href="/playlist/{{ playlist_id }}/{{ song.id }}/down">-1</a>&nbsp;
+&nbsp; Played {{ song.play_count }} time(s)<br/><br/>
+{% if ispublic == 1 %}
+Share this playlist on Facebook<br/><br/>
+<div class="fb-share-button" data-href="http://www.mixr.pw/playlist/{{ playlist_id }}" data-type="button_count"></div>
+{% endif %}
+{% if notyours == 1 %}
+Like this playlist? <a href="/playlist/copy/{{ playlist_id }}">Click here to copy it!</a>
+{% endif %}
+<br/><br/>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- alto - bottom -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:468px;height:60px"
+     data-ad-client="ca-pub-0155569923111859"
+     data-ad-slot="3857279239"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+{% endblock %}

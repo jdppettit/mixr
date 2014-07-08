@@ -1,0 +1,19 @@
+<!doctype HTML>
+Welcome to project Storm!
+<br/>
+Not much happening here yet, but you can use the following end points to do things:
+<br/>
+/play/once/youtube_video_id - This will play the specified YouTube video once<br/>
+/play/loop/youtube_video_id - This will play the specified YouTube video on a loop (maybe)<br/>
+<br/><br/>
+{% if error %}
+{{ error }}<br/><br/>
+{% endif %}
+{% if loggedin == False %}
+<a href="/login">Login</a><br/>
+<a href="/register">Register for an Account</a><br/>
+{% else %}
+<a href="/logout">Logout</a><br/>
+<a href="/playlist">Playlists</a><br/>
+{% endif %}
+

@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block title %}
+- Page not found 
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<h2>Sorry, that's doesn't appear to be a thing</h2>
+<p>You're seeing this page because the thing you asked for doesn't exist! You might want to consider going <a href="/">back</a>.</p>
+{% endblock %}
+

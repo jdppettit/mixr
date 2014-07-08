@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% block title %}
+- Create a Playlist
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+{% if error %}
+{{ error }}
+{% endif %}
+{% if message %}
+{{ message }}
+{% endif %}
+<a href="/playlist" class="btn btn-default" role="button">Back</a><br/><br/>
+<form action="{{ url_for('playlistHandler') }}" method="post">
+	<input class="form-control" type="text" name="name" placeholder="Name of playlist"/><br/>
+	Make Public? <input class="form-control" type="checkbox" name="public"><br/><br/>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+</form>
+{% endblock %}

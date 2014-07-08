@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block title %}
+- Login
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<form class="form-signin" role="form" action="{{ url_for('loginHandler') }}" method="post">
+        <input name="username" type="username" class="form-control" placeholder="Username" required autofocus>
+        <input name="password" type="password" class="form-control" placeholder="Password" required><br/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button><br/>
+      </form>
+</div>
+{% endblock %}

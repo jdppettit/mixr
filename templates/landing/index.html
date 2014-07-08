@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="msvalidate.01" content="515A39D644D19F0205CBF4EFAA76A5A9" />
+    <title>mixr - your personal dj</title>
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static',filename="landing/css/bootstrap.css") }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static',filename="landing/css/main.css") }}" rel="stylesheet">
+
+    <!-- Fonts from Google Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stats.mixr.pw/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="http://stats.mixr.pw/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+<!-- End Piwik Code -->
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://www.mixr.pw"><b>mixr</b></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/login">Already a member?</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	<div id="headerwrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<h1>Listen to your music,<br/>
+					over and over and over!</h1>
+					<form class="form-inline" role="form" action="/preregister" method="post">
+					  <div class="form-group">
+					    <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter your email address">
+					  </div>
+					  <button type="submit" class="btn btn-warning btn-lg">Make a Free Account!</button>
+					</form>					
+				</div><!-- /col-lg-6 -->
+				<div class="col-lg-6">
+				<img class="img-responsive" src="{{ url_for('static',filename="landing/img/ipad-heart.png") }}"  alt="">
+				</div><!-- /col-lg-6 -->
+				
+			</div><!-- /row -->
+		</div><!-- /container -->
+	</div><!-- /headerwrap -->
+	
+	
+	<div class="container">
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<h1>Take control of your music</h1>
+				<h3>Mixr uses your preferences to create a personalized playlist of all your favorite music</h3>
+			</div>
+		</div><!-- /row -->
+		
+		<div class="row mt centered">
+			<div class="col-lg-4">
+				<span style="font-size:100px; color:black;" class="glyphicon glyphicon-headphones"></span>
+				<!--<img src="assets/img/ser01.png" width="180" alt="">--!>
+				<h4>Compatible with existing music services</h4>
+				<p>mixr pulls music from Youtube so you can listen to the music you already love</p>
+			</div><!--/col-lg-4 -->
+
+			<div class="col-lg-4">
+				<span style="font-size:100px; color:black;" class="glyphicon glyphicon-stats"></span>
+				<!--<img src="assets/img/ser02.png" width="180" alt="">--!>
+				<h4>Dynamic and hands off</h4>
+				<p>Set it and forget it! Make your playlist and then mixr handles the rest, serving up song after song without any intervention on your part. Kick back, relax!</p>
+
+			</div><!--/col-lg-4 -->
+
+			<div class="col-lg-4">
+				<span style="font-size:100px; color:green;" class="glyphicon glyphicon-ok"></span>
+				<!--<img src="assets/img/ser03.png" width="180" alt="">--!>
+				<h4>Easy to use</h4>
+				<p>mixr is easy by design! Go from sign up to rocking out in about a minute.</p>
+
+			</div><!--/col-lg-4 -->
+		</div><!-- /row -->
+	</div><!-- /container -->
+	
+	<div class="container">
+		<hr>
+		<div class="row centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<form class="form-inline" role="form" action="/preregister" method="post">
+				  <div class="form-group">
+				    <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Enter your email address">
+				  </div>
+				  <button type="submit" class="btn btn-warning btn-lg">Make a Free Account!</button>
+				</form>					
+			</div>
+			<div class="col-lg-3"></div>
+		</div><!-- /row -->
+		<hr>
+	</div><!-- /container -->
+	
+	<div class="container">
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<h1>mixr is for everyone</h1>
+				<h3>mixr is designed to be easy - you don't need any existing music files. Just search for your favorite songs on Youtube, add them to mixr, and you'll be enjoing your music in no time at all.</h3>
+			</div>
+		</div><!-- /row -->
+	
+		<! -- CAROUSEL -->
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+				
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner">
+				    <div class="item active">
+				      <img src="{{ url_for('static',filename="landing/img/mixr_laptop.png") }}" alt="">
+				    </div>
+				  </div>
+				</div>			
+			</div><!-- /col-lg-8 -->
+		</div><!-- /row -->
+	</div><! --/container -->
+	
+	<div class="container">
+		<hr>
+		<div class="row centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<form class="form-inline" role="form" method="post" action="/preregister">
+				  <div class="form-group">
+				    <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Enter your email address">
+				  </div>
+				  <button type="submit" class="btn btn-warning btn-lg">Make a Free Account!</button>
+				</form>					
+			</div>
+			<div class="col-lg-3"></div>
+		</div><!-- /row -->
+		<hr>
+		<p class="centered">mixr - copyright &copy; 2013, all rights reserved<br/>Theme created by BlackTie.co - Attribution License 3.0 - 2013</p>
+	</div><!-- /container -->
+	
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{{ url_for('static',filename="landing/js/bootstrap.min.js") }}"></script>
+  </body>
+</html>

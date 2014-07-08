@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+{% block title %}
+- Search
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+{% if playlists %}
+<h2>Playlists</h2>
+	{% set x = 0 %}
+	{% for playlist in playlists %}
+		{% if x % 2 == 0 %}
+			<div style="background-color:#E6E6E6; padding:10px;">
+				<a href="/playlist/{{ playlist.id }}">{{ playlist.title }}</a>&nbsp;&nbsp;<a href="/playlist/play/{{ playlist.id }}" class="btn btn-success btn-sm" role="button">Play Playlist</a>&nbsp;<a href="/playlist/edit/{{ playlist.id }}" class="btn btn-info btn-sm" role="button">Edit Playlist</a><br/>
+			</div>
+		{% else %}
+			<div style="padding:10px;">
+				<a href="/playlist/{{ playlist.id }}">{{ playlist.title }}</a>&nbsp;&nbsp;<a href="/playlist/play/{{ playlist.id }}" class="btn btn-success btn-sm" role="button">Play Playlist</a>&nbsp;<a href="/playlist/e
+dit/{{ playlist.id }}" class="btn btn-info btn-sm" role="button">Edit Playlist</a><br/>
+
+			</div>
+		{% endif %}
+	{% set x = x+1 %}
+	{% endfor %}
+<br/>
+{% endif %}
+{% if songs %}
+<h2>Songs</h2>
+	{% set y = 0 %}
+	{% for song in songs %}
+		{% if y % 2 == 0 %}
+			<div style="background-color:#E6E6E6; padding:10px;">
+				<a href="/playlist/{{ song.playlist_id }}">{{ song.title }}</a>&nbsp;&nbsp;<a href="/play/once/{{ song.url }}" class="btn btn-success btn-sm" role="button">Play Song</a>&nbsp;<a href="/song/edit/{{ song.id }}" class="btn btn-info btn-sm" role="button">Edit Song</a><br/>
+			</div>
+		{% else %}
+			<div style="padding:10px;">
+				<a href="/playlist/{{ song.playlist_id }}">{{ song.title }}</a>&nbsp;&nbsp;<a href="/play/once/{{ song.url }}" class="btn btn-success btn-sm" role="button">Play Song</a>&nbsp;<a href="/song/edit/{{ song.id }}" class="btn btn-info btn-sm" role="button">Edit Song</a><br/>
+			</div>
+		{% endif %}
+	{% set y = y + 1 %}
+	{% endfor %}
+<br/>
+{% endif %}
+{% if tags %}
+<h2>Tags</h2>
+	{% set z = 0 %}
+	{% for tag in tags %}
+		{% if z % 2 == 0 %}
+			<div style="background-color:#E6E6E6; padding:10px;">
+				<a href="/tag/{{ tag.id }}">{{ tag.tag_name }}</a><br/>
+			</div>
+		{% else %}
+			<div style="padding:10px;">
+				<a href="/tag/{{ tag.id }}">{{ tag.tag_name }}</a><br/>
+			</div>
+		{% endif %}
+	{% set z = z + 1 %}
+	{% endfor %}
+<br/>
+{% endif %}
+{% if not playlists and not songs and not tags %}
+<h2>Nothing found!</h2>
+<p>Sorry, couldn't find anything cap'n!</p>
+{% endif %}
+{% endblock %}

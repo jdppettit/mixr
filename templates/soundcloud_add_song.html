@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+{% block title %}
+- Add Song (Soundcloud)
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<a href="/playlist" class="btn btn-default" role="button">Back</a><br/><br/>
+<h2>Add a Song (Soundcloud)</h2>
+<p>To add a song you'll need one thing: the URL for the Soundcloud song you want to add (this is in the address bar when listening to the song).
+Paste that in the "Soundcloud URL" box and then enter the title for the song. Next, enter a weight and click add!</p>
+<form action="/playlist/add/{{ playlist_id }}/soundcloud/handler" method="post">
+        <input class="form-control" type="text" name="url" id="url" onblur="doMagic()" placeholder="Soundcloud URL"/><br/>
+        <input class="form-control" type="text" name="weight" placeholder="Weight: 1-5"/><br/>
+        <input class="form-control" type="text" name="title" id="title" placeholder="Song Title"/><br/>
+        <br/>
+        <button class="btn btn-primary btn-block" type="submit">Add</button>
+</form>
+<br/>
+<h2>Need to search for your song?</h2>
+<p>Don't have the URL for your song? Search for the name of the song below.</p>
+<form id="vb_yt_search-form" action="https://soundcloud.com/search" method="get" target="_blank">
+<input class="form-control" id="vb_yt_search-term" name="q" type="text" maxlength="128" placeholder="Soundcloud Search (Opens in new tab)"/><br/>
+<button class="form-control btn btn-info" type="submit">Search</button>
+</form>
+{% endblock %}

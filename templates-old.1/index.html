@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mixr is your personal dj. Make a playlist, give each song a weight and mixr will serve up a never ending randomized playlist of your favorite music. ">
+    <meta name="author" content="Joe Pettit">
+    <meta name="keywords" content="mixr, music engine, music player, music, alternative, rap, rock and roll, rock, playlist">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='images/favicon.ico') }}">
+    <meta name="msvalidate.01" content="515A39D644D19F0205CBF4EFAA76A5A9" />
+    <meta property='og:image' content='{{ url_for('static',filename="images/mixr.png") }}'/>
+    <title>mixr {% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="{{ url_for('static',filename='css/bootstrap-theme.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/error.css') }}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static',filename='css/theme.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/imagehover.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/tags.css') }}" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stats.mixr.pw/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="https://www.mixr.pw/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+  <body role="document">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ url_for('index') }}">mixr</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+	{% if not session.logged_in %}
+            <form class="navbar-form navbar-right" role="form" method="post" action="/login/handler">
+            <div class="form-group">
+              <input type="text" name="username" placeholder="Username" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+	    </form>
+	    <li><a href="/register">Register</a></li>
+	    <li><a href="/forgot">Forgot</a></li>
+	{% else %}
+	    <form class="navbar-form navbar-right" role="form" method="post" action="/search/handler">
+            <div class="form-group">
+              <input type="text" name="search" placeholder="Search mixr" class="form-control">
+            </div>
+            </form>
+	    <li><a href="/account">Account</a></li>
+	    <li><a href="/playlist">Playlists</a></li>
+	    <li><a href="/logout">Logout</a></li>
+	{% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	{% if error %}
+	<div align="center">
+	<div class="alert alert-danger" style="width:80%">{{ error }}</div>
+	</div>
+	{% else %}
+	{% block error %}{% endblock %}
+	{% endif %}
+	{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+
+
+    <div class="container theme-showcase" role="main">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+	{% block content %}
+	{% if not session.logged_in %}
+        <h1>What's mixr?</h1>
+	<p>mixr is your personal dj. Give mixr URL's to your favorite songs on YouTube, rate each song and then kick back and enjoy the tunes. mixr will use your ratings to create a random playlist of your favorite songs and serve them up endlessly.</p>
+	<p>Why listen to songs you don't like on Pandora or Slacker? mixr lets you listen to all of your favorite songs without the distractions.</p>
+	<p>So, are you ready to give mixr a whirl? Its free! You just need to make an account to get started.</p>
+	<p><a href="/register" class="btn btn-success btn-lg" role="button">Make a Free Account</a></p>
+	{% else %}
+	<h1>Lets get rockin'</h1>
+	<p>Now that you've signed up, you just need to make a playlist and then kick back and enjoy!</p>
+	<p><a href="/playlist/create" class="btn btn-primary btn-lg" role="button">Make a Playlist</a>&nbsp;<a href="/playlist" class="btn btn-primary btn-lg" role="button">View Playlists</a></p>
+	{% endif %}
+	</div>
+	<div class="row" style="background-color:#e8e6e6; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;">
+        <div class="col-md-4">
+          <h2>1. Make a playlist</h2>
+        <p>First you'll need to make a playlist. Find the URL's of all of your favorite videos (the thing in the address bar) and then make a playlist with them.</p>
+	<p><a href="/playlist/create" class="btn btn-success" role="button">Make a Playlist</a></p>
+	</div>
+        <div class="col-md-4">
+          <h2>2. Rate 'em</h2>
+       <p>The weight you give your music determins how often it plays. Go ahead and assign a weight to each song, between 1 and 5. Songs with a lower score play less, songs with a higher score play more.</p>
+	</div>
+        <div class="col-md-4">
+          <h2>3. Play it</h2>
+	<p>And thats really it. View your playlists by clicking the link below, click play and you'll be enjoying a nonstop mix of your favorite songs!</p>
+	<p><a href="/playlist" class="btn btn-info" role="button">View Playlists</a></p>
+	{% endblock %}
+	</div>
+	</div>
+    </div> <!-- /container -->
+<div id="footer">
+      <div class="container">
+        <p style="color:#999;padding:10px;padding-top:40px;display:inline-block;"><a href="/contact">Contact</a>&nbsp;&nbsp;<a href="/privacy">Privacy</a>&nbsp;&nbsp;<a href="/about">About</a>&nbsp;&nbsp;<a href="/faq">FAQ</a>&nbsp;&nbsp;|&nbsp;&nbsp;Created by Joe Pettit.&nbsp;&nbsp;
+<div style="float:right; display:inline-block;padding:10px;padding-top:20px;"><a href="https://www.facebook.com/mixrpersonaldj" class="highlightit"><img src="{{ url_for('static',filename='images/facebook_icon.png') }}"/></a>&nbsp;&nbsp;
+<a href="https://plus.google.com/u/0/b/106510303671423610159/106510303671423610159/about/p/pub" class="highlightit"><img src="{{ url_for('static',filename='images/googleplus_icon.png') }}"/></a>&nbsp;&nbsp;
+<a href="https://twitter.com/mixr_app" class="highlightit"><img src="{{ url_for('static',filename='images/twitter_icon.png') }}"/></a>
+      </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/docs.min.js') }}"></script>
+  </body>
+</html>

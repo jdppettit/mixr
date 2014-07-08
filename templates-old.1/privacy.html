@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% block title %}
+- Privacy
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<h2>We don't share your information.</h2>
+<p>Plain and simple. I know, you were probably expecting some legal document here, but I'm not sure that's necessary. I've done my best to only ask for the most important information to create an account, your email, your username and your password. This stuff is <strong>only</strong> used to identify your account and will never be sold or used in any way other than to send you a password reset email if you ask for it. If you have any questiosn don't hesitate to <a href="/contact">ask</a>.</p>
+{% endblock %}

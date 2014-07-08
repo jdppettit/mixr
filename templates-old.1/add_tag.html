@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% block title %}
+- Add Tag
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+	{% if tag_type == "song" %}
+	<h2>Add a Tag</h2>
+	<form action="/song/{{ song_id }}/tag/add/handler" method="post">
+		<input type="text" class="form-control" name="tag_title" placeholder="Tag title"/><br/>
+		<button class="btn btn-info" type="submit">Add Tag</button>
+	</form>
+	{% elif tag_type == "playlist" %}
+	<h2>Add a Tag</h2>
+	<form action="/playlist/{{ playlist_id }}/tag/add/handler" method="post">
+                <input type="text" class="form-control" name="tag_title" placeholder="Tag title"/><br/>
+                <button class="btn btn-info" type="submit">Add Tag</button>
+        </form>
+	{% else %}
+	<h2>Sorry, something went wrong, try again.</h2>
+	{% endif %}
+{% endblock %}

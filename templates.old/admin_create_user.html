@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+{% block title %}
+- Admin - Create User
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<form action="/admin/user/create/handler" method="post">
+	<input type="text" class="form-control" placeholder="Username" name="username"/><br/>
+	<input type="password" class="form-control" placeholder="Password" name="password"/><br/>
+	<input type="email" class="form-control" placeholder="Email" name="email"/><br/>
+	<button class="btn btn-success form-control" type="submit">Make It</button>
+</form>
+{% endblock %}
+

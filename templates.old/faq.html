@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% block title %}
+- FAQ
+{% endblock %}
+{% if message %}
+ <div align="center">
+        <div class="alert alert-info" style="width:80%">{{ message }}</div>
+        </div>
+{% endif %}
+{% if error %}
+ <div align="center">
+        <div class="alert alert-danger" style="width:80%">{{ error }}</div>
+        </div>
+{% endif %}
+{% block content %}
+<dl>
+	<dt>What is mixr?</dt>
+	<dd>mixr is a music engine - you may want to take a look at our <a href="/about">about page</a> for more info!</dd>
+	<br/>	
+	<dt>How is mixr free?</dt>
+	<dd>We have some adds, but most of the magic is Youtube. Youtube is free, so we don't have to charge anything.</dd>
+	<br/>
+	<dt>What is weight?</dt>
+	<dd>Think of weight like a rating. A higher weight means you like that song more and thus, you want to hear it more. A smaller weight means the song will play less.</dd>
+	<br/>
+	<dt>What is suppress?</dt>
+	<dd>Say you like a song, but you're just not feeling it today. Click suppress, that will mean the next time this song would have played a different song will be played instead.</dd>
+	<br/>
+	<dt>Are there any keyboard shortcuts I can use?</dt>
+	<dd>Yep! You can press the spacebar on the play page to stop or start a video and you can press the Pause key (usually up there by scroll lock) to skip to the next song. If you can think of any other shortcuts that you would like to see please let me know!</dd>
+	<br/>
+	<dt>How does the import a playlist feature work?</dt>
+	<dd>The import a playlist lets you take a YouTube playlist and import it to mixr, saving you the work of adding each song individually. An imported playlist will automatically have the title of the playlist on YouTube and each song will be weighted at 3 by default. You can always change these things later though!</dd>
+</dl>
+{% endblock %}
